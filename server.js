@@ -1,8 +1,7 @@
 // Import Express framework
 const express = require('express');
 const sequelize = require('./database/sequelize');
-// const storeRouter = require('./routes/storeRouter');
-// const productRouter = require('./routes/productRouter');
+const taskRouter = require('./routes/taskRouter');
 // Create a PORT
 const PORT = 9090;
 
@@ -11,8 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-// app.use(storeRouter);
-// app.use(productRouter);
+app.use('/api',taskRouter);
 
 const server = async () => {
     try {
