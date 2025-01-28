@@ -123,7 +123,7 @@ exports.getAllTasks = async (req, res) => {
     }
 };
 
-// To get all tasks
+// To get all not completed tasks
 exports.getAllNotCompletedTask = async (req, res) => {
     try {
         const tasks = await taskModel.findAll({where: {completed: false}});
@@ -131,6 +131,23 @@ exports.getAllNotCompletedTask = async (req, res) => {
         // Send a success response
         res.status(201).json({
             message: 'All tasks to be completed in the database',
+            tasks,
+            total: tasks.length
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal Server Error' + error.message
+        });
+    }
+}
+// To get all completed tasks
+exports.getAllCompletedTask = async (req, res) => {
+    try {
+        const tasks = await taskModel.findAll({where: {completed: true}});
+    
+        // Send a success response
+        res.status(201).json({
+            message: 'All completed Tasks in the database',
             tasks,
             total: tasks.length
         })
