@@ -1,5 +1,6 @@
 const taskModel = require('../models/task');
 
+// To create a Task
 exports.createTask = async (req, res) => {
     try {
         const {taskName, dueDate = new Date(), priority, } = req.body;
@@ -54,7 +55,7 @@ exports.completeTask = async (req, res) => {
     }
 };
 
-// To mark a task as completed 
+// To Update a Task
 exports.updateTask = async (req, res) => {
     try {
         const taskId = req.params.id;
