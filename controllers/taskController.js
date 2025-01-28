@@ -3,7 +3,7 @@ const taskModel = require('../models/task');
 // To create a Task
 exports.createTask = async (req, res) => {
     try {
-        const {taskName, dueDate = new Date(), priority, } = req.body;
+        const {taskName, dueDate , priority, } = req.body;
         if (!taskName || !dueDate || !priority) {
             return res.status(400).json({
                 message: 'Please enter all fields'
