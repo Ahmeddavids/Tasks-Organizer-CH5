@@ -8,11 +8,13 @@ exports.createTask = async (req, res) => {
                 message: 'Please enter all fields'
             });
         }
-
+        
+        const formattedDate = dueDate.toLocaleString()
+        
         const newTask = await taskModel.create({
             taskName,
             priority,
-            dueDate: dueDate.toLocaleString()
+            dueDate: formattedDate
         });
 
         // Send a success response
