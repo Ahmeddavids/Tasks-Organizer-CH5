@@ -1,0 +1,5 @@
+node_modules
+controllers
+models
+migrations
+seeders
