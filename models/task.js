@@ -21,7 +21,7 @@ Task.init(
       allowNull: false
     },
     dueDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     completed: {
