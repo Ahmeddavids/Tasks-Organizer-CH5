@@ -52,4 +52,31 @@ exports.completeTask = async (req, res) => {
             message: 'Internal Server Error' + error.message
         });
     }
+};
+
+// To mark a task as completed 
+exports.updateTask = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const {taskName, priority, dueDate} = req.body;
+
+        const task = await taskModel.findByPk(taskId);
+        if (!task) {
+            return res.status(404).json({
+                message: 'Task not found'
+            });
+        }
+        const formattedDate = dueDate.toLocaleString();
+        
+        task.update({taskName, priority, dueDate: formattedDate});
+        // Send a success response
+        res.status(201).json({
+            message: 'Task updated successfully',
+            data: task
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal Server Error' + error.message
+        });
+    }
 }
