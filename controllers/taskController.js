@@ -30,3 +30,26 @@ exports.createTask = async (req, res) => {
     }
 };
 
+
+// To mark a task as completed 
+exports.completeTask = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const task = await taskModel.findByPk(taskId);
+        if (!task) {
+            return res.status(404).json({
+                message: 'Task not found'
+            });
+        }
+        task.update({completed: true});
+        // Send a success response
+        res.status(201).json({
+            message: 'Task completed',
+            data: task
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal Server Error' + error.message
+        });
+    }
+}
