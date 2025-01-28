@@ -81,7 +81,7 @@ exports.updateTask = async (req, res) => {
     }
 }
 
-// To mark a task as completed 
+// To delete a task
 exports.deleteTask = async (req, res) => {
     try {
         const taskId = req.params.id;
@@ -96,6 +96,24 @@ exports.deleteTask = async (req, res) => {
         // Send a success response
         res.status(201).json({
             message: 'Task deleted successfully'
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal Server Error' + error.message
+        });
+    }
+}
+
+// To get all tasks
+exports.getAllTasks = async (req, res) => {
+    try {
+        const tasks = await taskModel.findAll();
+    
+        // Send a success response
+        res.status(201).json({
+            message: 'All tasks in the database',
+            tasks,
+            total: tasks.length
         })
     } catch (error) {
         res.status(500).json({
