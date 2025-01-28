@@ -121,4 +121,22 @@ exports.getAllTasks = async (req, res) => {
             message: 'Internal Server Error' + error.message
         });
     }
+};
+
+// To get all tasks
+exports.getAllNotCompletedTask = async (req, res) => {
+    try {
+        const tasks = await taskModel.findAll({where: {completed: false}});
+    
+        // Send a success response
+        res.status(201).json({
+            message: 'All tasks to be completed in the database',
+            tasks,
+            total: tasks.length
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal Server Error' + error.message
+        });
+    }
 }
