@@ -2,6 +2,7 @@
 const express = require('express');
 const sequelize = require('./database/sequelize');
 const taskRouter = require('./routes/taskRouter');
+const cors = require('cors');
 // Create a PORT
 const PORT = 9090;
 
@@ -9,6 +10,7 @@ const PORT = 9090;
 const app = express();
 
 app.use(express.json());
+app.use(cors('*'))
 
 app.use('/api',taskRouter);
 
